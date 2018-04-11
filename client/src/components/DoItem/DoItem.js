@@ -1,38 +1,27 @@
 import React, {Component} from 'react'
 import './Home.css'
-import {makeToDo} from '../../actions/todo'
+import {removeTodo, markAsComplete} from '../../actions/todo'
 
-class DoForm extends Component {
-	state = {
-		task: ''
-	}
-	handleSubmit = (e) => {
+class DoItem extends Component {
+	remove = (e) => {
 		e.preventDefault()
-		makeToDo({
-			task: this.state.task,
-			value: ''
-		})
-		console.log(this.state.todo)
+		removeTodo(this.props.id)
 	}
-	handleChange = (e) => {
-		this.setState({
-			[e.target.name]: e.target.value
-		})
-		console.log(this.state)
+
+	complete = (e) => {
+		e.preventDefault()
+		markAsComplete(this.props.id, !this.props.complete)
 	}
 
 	render() {
 		return (
-			<div className="addContainer">
-			<form onSubmit={this.handleSubmit}>
-				<input type="text" onChange={this.handleChange} name="todo" placeholder="What Needs To Get Done?" />
-				<button type="submit">Add</button>
-			</form>
-			</div>
+			<li className="todo">
+       		 <p className="doMe"> {this.props.text} <button className="adjust" onClick={this.remove}>X</button></p>
+      		</li>
 		)
 	}
 }
-export default DoForm
+export default DoItem
 
 // import React, {Component} from 'react'
 // // import {Link} from 'react-router-dom'

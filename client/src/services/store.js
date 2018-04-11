@@ -1,9 +1,13 @@
-import {createStore} from 'redux'
+import {createStore, combineReducers} from 'redux'
 import createTaskReducer from '../reducers/createTaskReducer'
 
-const store = createStore(createTaskReducer)
+const rootReducer = combineReducers(
+	{
+		createTaskReducer
+	}
+)
 
-export default store
+export default createStore(rootReducer)
 
 // import {createStore, combineReducers} from 'redux'
 // import createTaskReducer from '../reducers/createTaskReducer'

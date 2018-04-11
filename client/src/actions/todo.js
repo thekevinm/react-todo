@@ -1,44 +1,54 @@
 import store from '../services/store'
 import axios from 'axios'
 
-export function makeToDo(task){
-	store.dispatch({
-		type: 'MAKE_TASKS',
-		task: task
+export function getTodos(status) {
+	let url = 'http://localhost:3001/todos'
 
+	if (status === 'active') {
+		url += '?complete=false'
+	}else if(status === 'completed') {
+		url += '?completed=true'
+	}
+
+	axios.get(url).then(resp => {
+		store.dispatch({
+			type: 'GET_TODOS',
+			payload: resp.data
+		})
 	})
 }
 
-// axios.post('http://localhost:3001/tasks', item).then(resp => {
-// 		store.dispatch({
-// 			type: 'MAKE_TASKS',
-// 			payload: resp.data
-// 		})
-// 	})	
+export function addTodo(todo) {
+  axios.post('http://localhost:3001/todos', {
+    text: todo,
+    complete: false
+  }).then(resp => {
+    getTodos()
+  })
+}
 
+export function removeTodo(id) {
+  axios.delete('http://localhost:3001/todos/' + id).then(resp => {
+    getTodos()
+  })
+}
 
+export function markAsComplete(id, complete) {
+  axios.patch('http://localhost:3001/todos/' + id, {
+    complete
+  }).then(resp => {
+    getTodos()
+  })
+}
 
-// import store from '../services/store'
-// import axios from 'axios'
+export function clearCompleted() {
+  const state = store.getState()
 
-// export function makeTasks(text) {
-// 	const item = {
-// 		task: text,
-// 		isCompleted: false
-// 	}
-// 	axios.post('http://localhost:3001/tasks', item).then(resp => {
-// 		store.dispatch({
-// 			type: 'MAKE_TASKS',
-// 			payload: resp.data
-// 		})
-// 	})	
-// }
+  const ids = state.todoReducer.todos.filter(todo => todo.complete === true).map(item => item.id)
 
-// export function getTasks(item) {
-// 	axios.get('http://localhost:3001/tasks').then(resp => {
-// 		store.dispatch({
-// 			type: 'GET_TASKS',
-// 			payload: resp.data
-// 		})
-// 	})
-// }
+  axios.all(ids.map(id => {
+    return axios.delete('http://localhost:3001/todos/' + id)
+  })).then(resp => {
+    getTodos()
+})
+}

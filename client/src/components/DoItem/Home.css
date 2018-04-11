@@ -3,6 +3,12 @@
 	justify-content: center;
 }
 
+.doMe {
+	width: 400px;
+	height: 35px;
+}
+
+
 input {
 	width:400px;
 	height: 35px;
@@ -12,6 +18,10 @@ input {
 
 button {
 	outline: none;
+}
+
+.adjust {
+	margin-left: 200px;
 }
 
 /*#doContainer {

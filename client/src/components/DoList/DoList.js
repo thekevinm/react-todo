@@ -1,35 +1,43 @@
 import React, { Component } from 'react'
 import store from '../../services/store'
 import './ToDoList.css'
-
+import {connect} from 'react-redux'
+import {getTodos} from '../../actions/todo'
+import DoItem from '../DoItem/DoItem'
+ 
 class DoList extends Component {
-	state = {
-		tasks: []
+	componentDidMount() {
+		getTodos(this.props.match.params.status)
 	}
 
-	componentDidMount(){
-		store.subscribe(() => {
-			const state = store.getState()
-			this.setState({
-				tasks: state.tasks
-			})
-		})
+	static defaultProps = {
+		todos: []
+	}
+
+	componentWillReceiveProps(newProps) {
+		if (this.props.match.params.status !== newProps.match.params.status) {
+			getTodos(newProps.match.params.status)
+		}
 	}
 
   render() {
     return (
-      <div>
-      	<ul>
-      		{this.state.tasks.map(task =>{
-      			return <li>{task}</li>
-      		})}
+     	<ul>
+	        {this.props.todos.map(todo => (
+	          <DoItem key={"todo" + todo.id} {...todo} />
+	        ))}
       	</ul>
-      </div>
     )
   }
 }
 
-export default DoList
+function mapStateToProps(state) {
+  return {
+    todos: state.createTaskReducer.todos
+  }
+}
+
+export default connect(mapStateToProps)(DoList)
 
 // import React, {Component} from 'react'
 // import './ToDoItems.css'

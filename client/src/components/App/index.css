@@ -10,6 +10,19 @@ header {
   padding-top: 15px;
 }
 
+.name {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
+ul {
+	list-style-type: none; 
+}
+
+.header {
+	margin-left: 780px;
+	color: pink;
+}
 
 
