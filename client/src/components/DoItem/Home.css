@@ -1,14 +1,3 @@
-.addContainer {
-	display: flex;
-	justify-content: center;
-}
-
-.doMe {
-	width: 400px;
-	height: 35px;
-}
-
-
 input {
 	width:400px;
 	height: 35px;
@@ -20,37 +9,19 @@ button {
 	outline: none;
 }
 
-.adjust {
-	margin-left: 200px;
-}
-
-/*#doContainer {
+.todo {
 	display: flex;
-	justify-content: center;
-	background-color: silver;
+	width: 75%;
+	margin: auto;
 }
 
-#whatTodo {
-	width: 400px;
-	height: 30px;
-	padding-left: 15px;
-	outline: none;
-	border:2px solid silver;
-	border-radius: 25px;
+.todo button {
+	background-color: inherit;
+	border: none;
+	font-size: 25px;
 }
 
-::placeholder {
-	color: silver;
+.todo button:hover {
+	color: red;
+	cursor: pointer;
 }
-
-button {
-	height: 30px;
-	background-color: silver;
-	outline: none;
-	border:1px solid grey;
-	border-radius:25px;
-}
-
-button:hover {
-	background-color: grey;
-}*/

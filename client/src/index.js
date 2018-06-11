@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 import App from './components/App'
 import registerServiceWorker from './registerServiceWorker'
 
-import 'normalize.css/normalize.css'
-import 'semantic-ui-css/semantic.css'
+// import 'normalize.css/normalize.css'
+// import 'semantic-ui-css/semantic.css'
 
 import store from './services/store'
 

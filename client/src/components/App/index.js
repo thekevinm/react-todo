@@ -38,7 +38,7 @@ class App extends Component {
       <div>
 
       <div className="header">
-      <h3>todos</h3>
+        <h1>To Do List!</h1>
       </div>
 
         <div className="name">
@@ -47,9 +47,11 @@ class App extends Component {
             <button type="submit">Submit</button>
           </form>
         </div>
+
         <div className="stuff">
           <Route path="/:status?" exact component={DoList} />
         </div>
+        
       </div>
       </Router>
     )
